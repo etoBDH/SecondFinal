@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Post</title>
+</head>
+<body>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="add.html">Add Post</a></li>
+        <li><a href="view.html">View Post</a></li>
+    </ul>
+    <script>
+        // 레코드 정보 (임의로 정한 데이터 예시)
+        var record = {
+            title: "Post Head",
+            content: "Post Detail",
+            // 여기에 다른 필드도 추가할 수 있습니다.
+        };
+
+        // 페이지 로드 시 레코드 정보를 표시
+        function displayRecord() {
+            var titleElement = document.getElementById("title");
+            var contentElement = document.getElementById("content");
+
+            titleElement.textContent = record.title;
+            contentElement.textContent = record.content;
+        }
+
+        // Edit 페이지로 이동
+        function editRecord() {
+            window.location.href = "edit.html"; // Edit 페이지로 이동
+        }
+
+        // Delete 확인 창 표시
+        function confirmDelete() {
+            var confirmDelete = confirm("Delete the Post?");
+            if (confirmDelete) {
+                // 실제로 삭제 작업을 수행하는 코드를 추가해야 합니다.
+                alert("Post has been deleted."); // 삭제 완료 알림
+            }
+        }
+    </script>
+    <h1>View Post</h1>
+    <p><strong>제목:</strong> <span id="title"></span></p>
+    <p><strong>내용:</strong> <span id="content"></span></p>
+    <button onclick="editRecord()">Edit</button>
+    <button onclick="confirmDelete()">Delete</button>
+    <script>
+        displayRecord(); // 페이지 로드 시 레코드 정보를 표시
+    </script>
+</body>
+</html>

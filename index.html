@@ -1,11 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <title>Travel Plan</title>
+  <li><a href="add.html">Add Post</a></li>
+  <li><a href="edit.html">Edit Post</a></li>
+  <li><a href="view.html">View Post</a></li>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1500px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text, and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }
+  </style>
 </head>
 <body>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav">
+      <h4>Choi's Blog</h4>
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#section1">Place</a></li>
+        <li><a href="#section2">Schedule</a></li>
+        <li><a href="#section3">Travel Fee</a></li>
+        <li><a href="#section4">Extra Information</a></li>
+      </ul>
+      <br>
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">Add</button>
+
+      <!-- Add Modal -->
+      <div class="modal fade" id="addModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Add New Entry</h4>
+            </div>
+            <div class="modal-body">
+              <form role="form">
+                <div class="form-group">
+                  <label for="place">Place:</label>
+                  <input type="text" class="form-control" id="place">
+                </div>
+                <div class="form-group">
+                  <label for="schedule">Schedule:</label>
+                  <input type="text" class="form-control" id="schedule">
+                </div>
+                <div class="form-group">
+                  <label for="travelFee">Travel Fee:</label>
+                  <input type="text" class="form-control" id="travelFee">
+                </div>
+                <div class="form-group">
+                  <label for="extraInfo">Extra Information:</label>
+                  <input type="text" class="form-control" id="extraInfo">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-success" data-dismiss="modal" onclick="addEntry()">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search Blog..">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div>
+    </div>
     
+    <div class="col-sm-9">
+      <div id="section1">
+        <hr>
+        <h2>Place</h2>
+        <!-- Place content here -->
+        <div id="placeContent"></div>
+      </div>
+      <div id="section2">
+        <hr>
+        <h2>Schedule</h2>
+        <!-- Schedule content here -->
+        <div id="scheduleContent"></div>
+      </div>
+      <div id="section3">
+        <hr>
+        <h2>Travel Fee</h2>
+        <!-- Travel Fee content here -->
+        <div id="travelFeeContent"></div>
+      </div>
+      <div id="section4">
+        <hr>
+        <h2>Extra Information</h2>
+        <!-- Extra Information content here -->
+        <div id="extraInfoContent"></div>
+      </div>
+      <br><br>
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid">
+  <p>Footer Text</p>
+</footer>
+
+<script>
+  // Data structure to store entries
+  var entries = [];
+
+  // Function to add an entry
+  function addEntry() {
+    var place = document.getElementById("place").value;
+    var schedule = document.getElementById("schedule").value;
+    var travelFee = document.getElementById("travelFee").value;
+    var extraInfo = document.getElementById("extraInfo").value;
+    
+    // Create an entry object
+    var entry = {
+      place: place,
+      schedule: schedule,
+      travelFee: travelFee,
+      extraInfo: extraInfo
+    };
+
+    // Add the entry to the entries array
+    entries.push(entry);
+
+    // Update the content for the respective section
+    updateContent();
+
+    // Clear the input fields
+    document.getElementById("place").value = "";
+    document.getElementById("schedule").value = "";
+    document.getElementById("travelFee").value = "";
+    document.getElementById("extraInfo").value = "";
+  }
+
+  // Function to update content for each section
+  function updateContent() {
+    var placeContent = document.getElementById("placeContent");
+    var scheduleContent = document.getElementById("scheduleContent");
+    var travelFeeContent = document.getElementById("travelFeeContent");
+    var extraInfoContent = document.getElementById("extraInfoContent");
+
+    placeContent.innerHTML = "";
+    scheduleContent.innerHTML = "";
+    travelFeeContent.innerHTML = "";
+    extraInfoContent.innerHTML = "";
+
+    for (var i = 0; i < entries.length; i++) {
+      placeContent.innerHTML += "<p>" + entries[i].place + "</p>";
+      scheduleContent.innerHTML += "<p>" + entries[i].schedule + "</p>";
+      travelFeeContent.innerHTML += "<p>" + entries[i].travelFee + "</p>";
+      extraInfoContent.innerHTML += "<p>" + entries[i].extraInfo + "</p>";
+    }
+  }                                                                                         
+</script>
 </body>
 </html>

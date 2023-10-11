@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Post</title>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="edit.html">Edit Post</a></li>
+    <li><a href="view.html">View Post</a></li>
+    <script>
+        function addPost() {
+            // 게시물 입력 폼을 생성
+            var postForm = document.createElement("form");
+            postForm.setAttribute("id", "postForm");
+
+            // 제목 입력 필드
+            var titleLabel = document.createElement("label");
+            titleLabel.textContent = "Title:";
+            var titleInput = document.createElement("input");
+            titleInput.setAttribute("type", "text");
+            titleInput.setAttribute("name", "title");
+            titleLabel.appendChild(titleInput);
+
+            // 내용 입력 필드
+            var contentLabel = document.createElement("label");
+            contentLabel.textContent = "Detail:";
+            var contentInput = document.createElement("textarea");
+            contentInput.setAttribute("name", "content");
+            contentLabel.appendChild(contentInput);
+
+            // "추가" 버튼
+            var addButton = document.createElement("button");
+            addButton.textContent = "add";
+            addButton.addEventListener("click", function() {
+                // 필수 입력 항목 확인
+                if (!titleInput.value || !contentInput.value) {
+                    alert("Write Title and Detail");
+                } else {
+                    // 게시물이 추가됩니다 알림 표시
+                    alert("Post is Added");
+                }
+            });
+
+            // 폼 요소들을 폼에 추가
+            postForm.appendChild(titleLabel);
+            postForm.appendChild(document.createElement("br"));
+            postForm.appendChild(contentLabel);
+            postForm.appendChild(document.createElement("br"));
+            postForm.appendChild(addButton);
+
+            // 폼을 화면에 표시
+            document.body.appendChild(postForm);
+        }
+    </script>
+</head>
+<body>
+    <h1>Add Post</h1>
+    <button onclick="addPost()">Add</button>
+</body>
+</html>
